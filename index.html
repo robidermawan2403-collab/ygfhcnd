@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warkop | Pesan Online</title>
+
+<style>
+:root {
+  --blue: #1261a0;
+  --dark: #092747;
+  --light: #eaf5ff;
+  --accent: #55b8ff;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--dark);
+  background: var(--light);
+}
+
+header {
+  background: linear-gradient(135deg, #092747, #1261a0);
+  color: white;
+  padding: 22px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 23px;
+  font-weight: 800;
+  color: #80d0ff;
+}
+
+header p { margin: 5px 0 0; font-size: 13px; }
+
+nav { display: flex; gap: 18px; flex-wrap: wrap; }
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hero {
+  padding: 65px 20px;
+  text-align: center;
+  color: white;
+  background:
+    radial-gradient(circle at 85% 20%, #55b8ff55, transparent 30%),
+    linear-gradient(135deg, #1261a0, #092747);
+}
+
+.hero .tag {
+  background: #ffffff20;
+  padding: 9px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  font-size: 13px;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 6vw, 52px);
+  margin: 20px 0 12px;
+}
+
+.hero h1 span { color: #80d0ff; }
+
+.hero p {
+  max-width: 550px;
+  margin: 0 auto 25px;
+  line-height: 1.7;
+  color: #e2f3ff;
+}
+
+.btn {
+  display: inline-block;
+  padding: 13px 21px;
+  background: #65c3ff;
+  color: #092747;
+  border: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover { filter: brightness(.94); }
+
+main {
+  max-width: 1100px;
+  padding: 25px 18px;
+  margin: auto;
+}
+
+.section-heading {
+  margin: 32px 0 18px;
+}
+
+.section-heading h2 { margin-bottom: 6px; }
+.section-heading p { color: #657d94; margin-top: 0; }
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #dcecff;
+  border-radius: 17px;
+  padding: 17px;
+  box-shadow: 0 5px 18px #0927470a;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px #09274715;
+}
+
+.food-icon {
+  font-size: 43px;
+  text-align: center;
+  background: #eaf5ff;
+  border-radius: 13px;
+  padding: 12px 0;
+}
+
+.card h3 { font-size: 16px; margin: 13px 0 8px; }
+.price { font-weight: bold; color: var(--blue); margin-bottom: 13px; }
+
+.add {
+  width: 100%;
+  padding: 11px;
+  border: 0;
+  border-radius: 9px;
+  color: white;
+  background: var(--blue);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add:hover { background: var(--dark); }
+
+.panel {
+  background: white;
+  border: 1px solid #dcecff;
+  border-radius: 17px;
+  padding: 22px;
+  margin-top: 26px;
+  box-shadow: 0 5px 18px #0927470a;
+}
+
+.panel h2 { margin-top: 0; }
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5eef7;
+}
+
+.cart-item .item-name { font-weight: bold; }
+.item-info { font-size: 13px; color: #718399; margin-top: 5px; }
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.qty button {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 8px;
+  background: #e1f1ff;
+  color: var(--dark);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.remove {
+  background: none;
+  color: #d13e49;
+  border: 0;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.empty {
+  padding: 20px 0;
+  color: #718399;
+  text-align: center;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 13px 0;
+}
+
+.grand-total {
+  border-top: 1px solid #dcecff;
+  padding-top: 16px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.clear {
+  background: #e5eff9;
+  color: #254666;
+  padding: 11px 15px;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 16px 0 7px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #c9dced;
+  border-radius: 9px;
+  background: #fbfdff;
+  color: var(--dark);
+  font: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #80caff;
+  border-color: var(--blue);
+}
+
+textarea { min-height: 90px; resize: vertical; }
+
+.small {
+  font-size: 12px;
+  color: #718399;
+  line-height: 1.6;
+}
+
+.wa {
+  width: 100%;
+  background: #16834a;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.wa:hover { background: #106c3c; }
+
+.location {
+  background: linear-gradient(135deg, #092747, #1261a0);
+  color: white;
+  border-radius: 17px;
+  padding: 24px;
+  margin: 28px 0;
+}
+
+.location p { line-height: 1.7; }
+
+.location a {
+  color: #80d0ff;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  background: #061a30;
+  color: white;
+  padding: 27px 15px;
+}
+
+footer p { color: #c5d9ec; font-size: 13px; }
+
+@media (max-width: 500px) {
+  header { justify-content: center; text-align: center; }
+  nav { justify-content: center; }
+  .hero { padding: 48px 18px; }
+  main { padding: 15px 12px; }
+  .panel { padding: 16px; }
+  .menu { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+  .card { padding: 12px; }
+  .cart-item { align-items: flex-start; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <div class="brand">☕ WARKOP PRAWINATA</div>
+    <p>Enak, hemat, dan bersahabat!</p>
+  </div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#keranjang">Keranjang 🛒</a>
+    <a href="#pesan">Pesan</a>
+    <a href="#lokasi">Lokasi</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="tag">💙 Teman nongkrong setiap hari</div>
+  <h1>Lagi Lapar?<br>Ke <span>Warkop Prawinata!</span></h1>
+  <p>Nikmati makanan dan minuman favorit dengan harga ramah di kantong. Pilih menu, masukkan ke keranjang, lalu pesan langsung lewat WhatsApp.</p>
+  <a class="btn" href="#menu">🍜 Lihat Menu Sekarang</a>
+</section>
+
+<main>
+
+  <section id="menu">
+    <div class="section-heading">
+      <h2>🍜 Menu Makanan</h2>
+      <p>Pilih makanan favorit kamu.</p>
+    </div>
+    <div class="menu" id="foods"></div>
+
+    <div class="section-heading">
+      <h2>🥤 Menu Minuman</h2>
+      <p>Teman makan yang bikin santai.</p>
+    </div>
+    <div class="menu" id="drinks"></div>
+  </section>
+
+  <section class="panel" id="keranjang">
+    <h2>🛒 Keranjang Pesanan</h2>
+    <p class="small">Tambah atau kurangi jumlah menu sesuka kamu.</p>
+    <div id="cart"></div>
+
+    <div class="total-line">
+      <span>Subtotal</span>
+      <strong id="subtotal">Rp0</strong>
+    </div>
+    <div class="total-line">
+      <span>Ongkos kirim</span>
+      <strong id="ongkir">Rp0</strong>
+    </div>
+    <div class="total-line grand-total">
+      <span>Total Bayar</span>
+      <strong id="total">Rp0</strong>
+    </div>
+    <button class="clear" type="button" onclick="clearCart()">🗑 Kosongkan Keranjang</button>
+  </section>
+
+  <section class="panel" id="pesan">
+    <h2>📝 Data Pemesan</h2>
+    <p class="small">Isi data dengan benar sebelum mengirim pesanan.</p>
+
+    <form id="orderForm">
+      <label for="nama">Nama lengkap *</label>
+      <input id="nama" name="nama" required maxlength="80"
+        placeholder="Masukkan nama kamu">
+
+      <label for="hp">Nomor HP *</label>
+      <input id="hp" name="hp" type="tel" required maxlength="20"
+        placeholder="Contoh: 081234567890">
+
+      <label for="metode">Metode pesanan *</label>
+      <select id="metode" name="metode" onchange="updateDelivery()" required>
+        <option value="antar">🚚 Diantar ke alamat</option>
+        <option value="ambil">🏃 Ambil sendiri</option>
+      </select>
+
+      <div id="alamatBox">
+        <label for="alamat">Alamat lengkap *</label>
+        <textarea id="alamat" name="alamat"
+          placeholder="Nama jalan, blok, nomor rumah, patokan"></textarea>
+      </div>
+
+      <label for="catatan">Catatan pesanan (opsional)</label>
+      <textarea id="catatan" name="catatan"
+        placeholder="Contoh: tidak pedas, es dipisah, dan lainnya"></textarea>
+
+      <p class="small" id="infoOngkir">
+        Ongkir sementara Rp5.000. Biaya akhir dikonfirmasi penjual.
+      </p>
+
+      <button type="submit" class="wa">
+        📲 Pesan Sekarang via WhatsApp
+      </button>
+
+      <p class="small">
+        Setelah tombol ditekan, WhatsApp akan terbuka dengan rincian pesanan.
+        Periksa kembali pesanan, lalu tekan tombol Kirim di WhatsApp.
+      </p>
+    </form>
+  </section>
+
+  <section class="location" id="lokasi">
+    <h2>📍 Lokasi Warkop</h2>
+    <p>Jl. Dasana Indah Blok SM7 No. 3</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Dasana+Indah+Blok+SM7+No.+3"
+       target="_blank" rel="noopener">
+      Buka lokasi di Google Maps ↗
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <strong>☕ WARKOP MURAHAN</strong>
+  <p>Teman nongkrong, teman makan, teman hemat.</p>
+  <p>Terima kasih sudah memilih Warkop Murahan 💙</p>
+</footer>
+
+<script>
+"use strict";
+
+// NOMOR WHATSAPP TUJUAN, FORMAT INTERNASIONAL TANPA TANDA +
+const NOMOR_WA = "6285692324244";
+
+// Ongkir sementara, bisa diubah sesuai kebijakan toko.
+const ONGKIR = 5000;
+
+// Daftar menu dan harga
+const products = [
+  {id:"kentang", name:"Kentang Goreng", icon:"🍟", price:10000, cat:"food"},
+  {id:"cireng", name:"Cireng", icon:"🥟", price:8000, cat:"food"},
+  {id:"bakso", name:"Bakso", icon:"🍲", price:12000, cat:"food"},
+  {id:"miekuah", name:"Mie Kuah", icon:"🍜", price:10000, cat:"food"},
+  {id:"miegoreng", name:"Mie Goreng", icon:"🍝", price:10000, cat:"food"},
+  {id:"mienyemek", name:"Mie Nyemek", icon:"🍜", price:12000, cat:"food"},
+  {id:"sosis", name:"Sosis Goreng", icon:"🌭", price:8000, cat:"food"},
+
+  {id:"esteh", name:"Es Teh Manis", icon:"🧋", price:5000, cat:"drink"},
+  {id:"atlas", name:"Atlas", icon:"🥤", price:8000, cat:"drink"},
+  {id:"anggur", name:"Soda Anggur", icon:"🍇", price:10000, cat:"drink"},
+  {id:"soda", name:"Soda Gembira", icon:"🥤", price:10000, cat:"drink"},
+  {id:"popice", name:"Pop Ice", icon:"🧋", price:5000, cat:"drink"},
+  {id:"kopi", name:"Kopi", icon:"☕", price:5000, cat:"drink"},
+  {id:"air", name:"Air Putih", icon:"💧", price:3000, cat:"drink"}
+];
+
+// Jumlah masing-masing menu dalam keranjang.
+const cart = {};
+
+function rupiah(number) {
+  return "Rp" + number.toLocaleString("id-ID");
+}
+
+function renderMenu(category, targetId) {
+  const target = document.getElementById(targetId);
+
+  target.innerHTML = products
+    .filter(product => product.cat === category)
+    .map(product => `
+      <article class="card">
+        <div class="food-icon">${product.icon}</div>
+        <h3>${product.name}</h3>
+        <div class="price">${rupiah(product.price)}</div>
+        <button type="button" class="add"
+          onclick="addItem('${product.id}')">
+          + Tambah
+        </button>
+      </article>
+    `).join("");
+}
+
+function addItem(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  renderCart();
+}
+
+function changeQty(id, amount) {
+  cart[id] = (cart[id] || 0) + amount;
+
+  if (cart[id] <= 0) {
+    delete cart[id];
+  }
+
+  renderCart();
+}
+
+function removeItem(id) {
+  delete cart[id];
+  renderCart();
+}
+
+function clearCart() {
+  Object.keys(cart).forEach(id => delete cart[id]);
+  renderCart();
+}
+
+function subtotalValue() {
+  return products.reduce((sum, product) => {
+    return sum + product.price * (cart[product.id] || 0);
+  }, 0);
+}
+
+function shippingValue() {
+  const isDelivery = document.getElementById("metode").value === "antar";
+  return isDelivery && subtotalValue() > 0 ? ONGKIR : 0;
+}
+
+function renderCart() {
+  const selected = products.filter(product => (cart[product.id] || 0) > 0);
+  const cartElement = document.getElementById("cart");
+
+  if (selected.length === 0) {
+    cartElement.innerHTML =
+      '<div class="empty">🛒 Keranjang masih kosong.<br>Yuk, pilih menu favorit kamu!</div>';
+  } else {
+    cartElement.innerHTML = selected.map(product => `
+      <div class="cart-item">
+        <div>
+          <div class="item-name">${product.icon} ${product.name}</div>
+          <div class="item-info">${rupiah(product.price)} per item</div>
+          <div class="qty">
+            <button type="button" aria-label="Kurangi ${product.name}"
+              onclick="changeQty('${product.id}', -1)">−</button>
+            <strong>${cart[product.id]}</strong>
+            <button type="button" aria-label="Tambah ${product.name}"
+              onclick="changeQty('${product.id}', 1)">+</button>
+            <button type="button" class="remove"
+              onclick="removeItem('${product.id}')">Hapus</button>
+          </div>
+        </div>
+        <strong>${rupiah(product.price * cart[product.id])}</strong>
+      </div>
+    `).join("");
+  }
+
+  const subtotal = subtotalValue();
+  const ongkir = shippingValue();
+
+  document.getElementById("subtotal").textContent = rupiah(subtotal);
+  document.getElementById("ongkir").textContent = rupiah(ongkir);
+  document.getElementById("total").textContent = rupiah(subtotal + ongkir);
+}
+
+function updateDelivery() {
+  const antar = document.getElementById("metode").value === "antar";
+  const alamat = document.getElementById("alamat");
+
+  document.getElementById("alamatBox").style.display = antar ? "block" : "none";
+  alamat.required = antar;
+
+  document.getElementById("infoOngkir").textContent = antar
+    ? "Ongkir sementara Rp5.000. Biaya akhir dikonfirmasi penjual."
+    : "Ambil sendiri di Jl. Dasana Indah Blok SM7 No. 3. Ongkir Rp0.";
+
+  renderCart();
+}
+
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const selected = products.filter(product => (cart[product.id] || 0) > 0);
+
+  if (selected.length === 0) {
+    alert("Keranjang masih kosong. Tambahkan menu terlebih dahulu!");
+    document.getElementById("menu").scrollIntoView({behavior:"smooth"});
+    return;
+  }
+
+  const nama = document.getElementById("nama").value.trim();
+  const hp = document.getElementById("hp").value.trim();
+  const metode = document.getElementById("metode").value;
+  const alamat = document.getElementById("alamat").value.trim();
+  const catatan = document.getElementById("catatan").value.trim();
+
+  if (!nama || !hp) {
+    alert("Mohon isi nama dan nomor HP.");
+    return;
+  }
+
+  if (metode === "antar" && !alamat) {
+    alert("Mohon isi alamat lengkap.");
+    return;
+  }
+
+  const subtotal = subtotalValue();
+  const ongkir = shippingValue();
+  const total = subtotal + ongkir;
+
+  const pesan = [
+    "🍜 *PESANAN BARU - WARKOP MURAHAN*",
+    "================================",
+    "",
+    "*DATA PEMESAN*",
+    "Nama: " + nama,
+    "No. HP: " + hp,
+    "Metode: " + (metode === "antar" ? "Diantar" : "Ambil sendiri"),
+    ...(metode === "antar"
+      ? ["Alamat: " + alamat]
+      : ["Lokasi ambil: Jl. Dasana Indah Blok SM7 No. 3"]),
+    "",
+    "*RINCIAN PESANAN*",
+    ...selected.map((product, index) =>
+      (index + 1) + ". " + product.name +
+      "\n   " + cart[product.id] + " x " + rupiah(product.price) +
+      " = " + rupiah(product.price * cart[product.id])
+    ),
+    "",
+    "Subtotal: " + rupiah(subtotal),
+    "Ongkir: " + rupiah(ongkir),
+    "*TOTAL BAYAR: " + rupiah(total) + "*",
+    "",
+    "Catatan: " + (catatan || "-"),
+    "",
+    "Mohon konfirmasi pesanan ini. Terima kasih! 🙏"
+  ].join("\n");
+
+  const whatsappURL =
+    "https://wa.me/" + NOMOR_WA + "?text=" + encodeURIComponent(pesan);
+
+  // Buka WhatsApp dengan rincian pesanan yang sudah disiapkan.
+  const whatsappWindow = window.open(whatsappURL, "_blank");
+
+  // Cadangan jika browser memblokir tab baru.
+  if (!whatsappWindow) {
+    window.location.href = whatsappURL;
+  }
+});
+
+renderMenu("food", "foods");
+renderMenu("drink", "drinks");
+renderCart();
+updateDelivery();
+</script>
+
+</body>
+</html>
